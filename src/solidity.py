@@ -48,10 +48,14 @@ def get_pragma(file: str) -> Optional[str]:
 def get_solc(filename: str) -> Optional[Path]:
     with open(filename) as f:
         file = f.read()
+    print(file.splitlines()[0:10])
     try:
         pragma = get_pragma(file)
+        print(f"{pragma=}")
         pragma = re.sub(r">=0\.", r"^0.", pragma)
+        print(f"{pragma=}")
         version = solcx.install_solc_pragma(pragma)
+        print(f"{version=}")
         return solcx.get_executable(version)
     except:
         return None

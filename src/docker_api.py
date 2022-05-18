@@ -78,6 +78,7 @@ def run(logqueue, file, tool, results_folder):
     shutil.copy(file, working_dir)
     shutil.copytree(os.path.join(config.TOOLS_CFG_PATH,tool["name"]), working_bin_dir)
     solc_compiler = solidity.get_solc(file)
+    print(f"{solc_compiler}")
     if not solc_compiler:
         log.message(logqueue, col.error(f"No compiler found for file '{file}'. Does it contain a version pragma?"))
         return results, result_log, result_tar
